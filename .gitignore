@@ -1,3 +1,9 @@
 originals/
 .DS_Store
 *.log
+
+# Raw source media, kept locally only — web versions live in assets/
+/INANI/
+/ORMEAU/
+/KARMA8A/
+/-1.75\ /

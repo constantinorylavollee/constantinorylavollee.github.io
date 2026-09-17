@@ -23,15 +23,17 @@
 
   <section class="project" id="inani" aria-labelledby="inani-title">
     <div class="wrap">
-      <div class="player" data-project="inani">
+      <div class="player" data-project="inani" data-peaks="assets/media/inani.peaks.json" data-duration="61.46">
         <div class="player__stage">
-          <video class="player__video" playsinline preload="none" poster="assets/img/project-inani.png"></video>
-          <button type="button" class="play-overlay is-disabled" disabled aria-label="Video coming soon" data-i18n-aria="coming_soon">
+          <video class="player__video" playsinline preload="metadata" poster="assets/img/project-inani.png">
+            <source src="assets/media/inani.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="play-overlay" aria-label="Play">
             <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
           </button>
-          <span class="player__note" data-i18n="coming_soon">Vidéo à venir</span>
         </div>
-        <img class="waveform-static" src="assets/img/waveform-inani.png" alt="" aria-hidden="true">
+        <div class="waveform" aria-hidden="true"></div>
       </div>
       <div class="project__row">
         <h2 class="project__title" id="inani-title">Inani</h2>
@@ -63,21 +65,60 @@
 
   <section class="project" id="project-175" aria-labelledby="p175-title">
     <div class="wrap">
-      <div class="player" data-project="175">
+      <div class="player player--gallery" data-project="175" data-peaks="assets/media/175.peaks.json" data-audio="assets/media/175.mp3" data-duration="357.09">
         <div class="player__stage">
-          <video class="player__video player__video--placeholder" playsinline preload="none"></video>
-          <button type="button" class="play-overlay is-disabled" disabled aria-label="Video coming soon" data-i18n-aria="coming_soon">
+          <div class="carousel">
+            <div class="carousel__track">
+              <div class="carousel__slide is-active">
+                <img src="assets/img/project-175-1.jpg" alt="" loading="lazy">
+              </div>
+              <div class="carousel__slide">
+                <img src="assets/img/project-175-2.jpg" alt="" loading="lazy">
+              </div>
+              <div class="carousel__slide">
+                <img src="assets/img/project-175-3.jpg" alt="" loading="lazy">
+              </div>
+              <div class="carousel__slide">
+                <video class="carousel__video" src="assets/media/175.mp4" playsinline muted loop preload="none"></video>
+              </div>
+            </div>
+            <button type="button" class="carousel__arrow carousel__arrow--prev" aria-label="Previous" data-i18n-aria="carousel_prev">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="carousel__arrow carousel__arrow--next" aria-label="Next" data-i18n-aria="carousel_next">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <button type="button" class="play-overlay" aria-label="Play">
             <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
           </button>
-          <span class="player__note" data-i18n="coming_soon">Vidéo à venir</span>
         </div>
-        <div class="waveform-bars" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
+        <div class="waveform" aria-hidden="true"></div>
       </div>
       <div class="project__row">
         <h2 class="project__title" id="p175-title">-1.75</h2>
         <p class="project__desc">Original music for -1.75, a seven-part photography project by Jeanne Seurot. I composed three pieces designed as immersions into the images. The project unfolds across seven editions, each with its own visual atmosphere, so I responded with three hybrid tracks, woven from natural sounds and field ambiences, that give a narrative frame to the journey through the photographs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="project" id="karma8a" aria-labelledby="karma8a-title">
+    <div class="wrap">
+      <div class="player" data-project="karma8a" data-peaks="assets/media/karma8a.peaks.json" data-duration="22.28">
+        <div class="player__stage">
+          <video class="player__video" playsinline preload="metadata" poster="assets/img/project-karma8a.jpg">
+            <source src="assets/media/karma8a.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="play-overlay" aria-label="Play">
+            <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+          </button>
+        </div>
+        <div class="waveform" aria-hidden="true"></div>
+      </div>
+      <div class="project__row">
+        <h2 class="project__title" id="karma8a-title">KARMA8A</h2>
       </div>
     </div>
   </section>

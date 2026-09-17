@@ -13,7 +13,9 @@
       play: "Lecture",
       pause: "Pause",
       coming_soon: "Vidéo à venir",
-      back_to_top: "Haut de page"
+      back_to_top: "Haut de page",
+      carousel_prev: "Précédent",
+      carousel_next: "Suivant"
     },
     en: {
       subtitle: "Composer · Producer · Paris",
@@ -25,7 +27,9 @@
       play: "Play",
       pause: "Pause",
       coming_soon: "Video coming soon",
-      back_to_top: "Back to top"
+      back_to_top: "Back to top",
+      carousel_prev: "Previous",
+      carousel_next: "Next"
     }
   };
 
@@ -90,14 +94,15 @@
     var playIcon = player.querySelector(".icon--play");
     var pauseIcon = player.querySelector(".icon--pause");
     var peaksUrl = player.getAttribute("data-peaks");
+    var audioUrl = player.getAttribute("data-audio");
     var duration = parseFloat(player.getAttribute("data-duration")) || undefined;
 
-    if (!video || !waveformEl || !btn || typeof window.WaveSurfer === "undefined") return;
+    if (!waveformEl || !btn || typeof window.WaveSurfer === "undefined") return;
+    if (!video && !audioUrl) return;
 
     function build(peaks) {
       var options = {
         container: waveformEl,
-        media: video,
         waveColor: "#c4c4c4",
         progressColor: "#1e1e1e",
         cursorColor: "transparent",
@@ -107,6 +112,7 @@
         height: 56,
         normalize: true
       };
+      if (video) { options.media = video; } else { options.url = audioUrl; }
       if (peaks) { options.peaks = [peaks]; options.duration = duration; }
 
       var ws = window.WaveSurfer.create(options);
@@ -138,6 +144,34 @@
     document.querySelectorAll(".player[data-peaks]").forEach(initPlayer);
   }
 
+  /* ---------------- Photo/video carousel ---------------- */
+  function initCarousel(carousel) {
+    var slides = carousel.querySelectorAll(".carousel__slide");
+    var prevBtn = carousel.querySelector(".carousel__arrow--prev");
+    var nextBtn = carousel.querySelector(".carousel__arrow--next");
+    if (!slides.length) return;
+    var index = 0;
+
+    function show(next) {
+      index = (next + slides.length) % slides.length;
+      slides.forEach(function (slide, i) {
+        var active = i === index;
+        slide.classList.toggle("is-active", active);
+        var vid = slide.querySelector("video");
+        if (!vid) return;
+        if (active) { vid.currentTime = 0; vid.play().catch(function () {}); }
+        else { vid.pause(); }
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", function () { show(index - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { show(index + 1); });
+  }
+
+  function initCarousels() {
+    document.querySelectorAll(".carousel").forEach(initCarousel);
+  }
+
   /* ---------------- Back to top ---------------- */
   function initBackToTop() {
     var btn = document.getElementById("backToTop");
@@ -155,6 +189,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     initLangToggle();
     initPlayers();
+    initCarousels();
     initBackToTop();
   });
 })();

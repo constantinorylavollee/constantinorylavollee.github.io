@@ -121,6 +121,62 @@ button { font-family: inherit; }
 .player.is-playing .play-overlay { opacity: 0; }
 .player.is-playing .player__stage:hover .play-overlay { opacity: 1; }
 
+/* Photo/video carousel (fills the stage behind the play overlay) */
+.carousel { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.carousel__track { position: relative; width: 100%; height: 100%; }
+.carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease;
+}
+.carousel__slide.is-active { opacity: 1; visibility: visible; z-index: 1; }
+.carousel__slide img,
+.carousel__slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(20, 20, 20, 0.45);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.18s ease;
+  backdrop-filter: blur(2px);
+}
+.carousel__arrow:hover { background: rgba(20, 20, 20, 0.75); }
+.carousel__arrow--prev { left: 12px; }
+.carousel__arrow--next { right: 12px; }
+.carousel__arrow .icon { width: 18px; height: 18px; }
+
+/* Gallery player (-1.75): portrait media shown whole inside the landscape stage,
+   with a small corner control instead of the centered play button */
+.player--gallery .carousel__slide img,
+.player--gallery .carousel__slide video { object-fit: contain; }
+.player--gallery .play-overlay {
+  left: 12px;
+  top: auto;
+  bottom: 12px;
+  transform: none;
+  width: 44px;
+  height: 44px;
+}
+.player--gallery .play-overlay:hover:not(:disabled) { transform: scale(1.05); }
+.player--gallery .play-overlay .icon { width: 18px; height: 18px; }
+
 .player__note {
   position: absolute;
   right: 12px;
@@ -248,6 +304,8 @@ button { font-family: inherit; }
   .about__photo { max-width: 200px; }
   .about__grid { grid-template-columns: 1fr; }
   .play-overlay { width: 60px; height: 60px; }
+  .carousel__arrow { width: 32px; height: 32px; }
+  .carousel__arrow .icon { width: 14px; height: 14px; }
   .hero__title { font-size: 12vw; }
   .hero__subtitle { font-size: 11px; }
 }
