@@ -1,4 +1,4 @@
-# site-clov
+# constantinorylavollee.github.io
 
 Portfolio website for **Constantin Ory-Lavollée** (Clov) — composer & producer.
 
@@ -6,7 +6,7 @@ Built from a Figma prototype as a static, no-build site and hosted on GitHub Pag
 
 ## Live site
 
-https://julpiro.github.io/site-clov/
+https://constantinorylavollee.github.io/
 
 ## Stack
 
