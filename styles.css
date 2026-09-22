@@ -45,17 +45,159 @@ button { font-family: inherit; }
 .wrap { width: var(--content); margin-inline: auto; }
 
 /* ---------- Hero ---------- */
-/* Exact Figma composition, rendered from the source file as one scaling image */
-.hero { position: relative; background: var(--color-bg); line-height: 0; }
+/* Figma artwork as one scaling image, with the type set as live text on top.
+   Every offset below is a share of the hero's own width (cqw), so the text
+   tracks the artwork exactly as it scales — the values come from the Figma
+   render measured at its native 1600px. */
+.hero {
+  position: relative;
+  container-type: inline-size;
+  background: var(--color-bg);
+  line-height: 0;
+}
 .hero__img { display: block; width: 100%; height: auto; }
-/* Transparent hit area over the baked-in "INFO" label (top-right) */
-.hero__info-hit {
+
+.hero__title,
+.hero__subtitle,
+.hero__controls,
+.hero__sign {
   position: absolute;
-  top: 1%;
-  right: 0.4%;
-  width: 8%;
-  height: 8%;
   z-index: 2;
+  margin: 0;
+}
+
+/* Language switch sits beside INFOS. Baseline alignment keeps INFOS exactly
+   where the Figma render puts it: it is the taller item, so it sets the
+   baseline and the smaller toggle hangs off it. */
+.hero__controls {
+  top: 1.2447cqw;
+  right: 1.5cqw;
+  display: flex;
+  align-items: baseline;
+  gap: 1.1cqw;
+}
+.hero__controls .lang-toggle {
+  padding: 0;
+  font-size: max(10px, 0.9cqw);
+  letter-spacing: 0.06em;
+}
+
+.hero__title {
+  top: 2.9786cqw;
+  left: 2.75cqw;
+  font-size: 5.75cqw;
+  font-weight: 600;
+  line-height: 1.1087;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+.hero__subtitle {
+  top: 15.4422cqw;
+  left: 3.4375cqw;
+  font-size: 0.9375cqw;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+.hero__info {
+  /* the floor only bites below ~1110px, where the proportional size would drop
+     under 16px; it keeps INFOS tappable and larger than the language switch */
+  font-size: max(16px, 1.4375cqw);
+  font-weight: 600;
+  line-height: 1.2174;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.hero__info:hover, .hero__info:focus-visible { border-color: var(--color-ink); }
+
+.hero__sign {
+  top: 72.2825cqw;
+  left: 2.75cqw;
+}
+.hero__sign-name {
+  display: block;
+  font-size: 1.5cqw;
+  font-weight: 600;
+  line-height: 1.0833;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.hero__sign-role {
+  display: block;
+  margin-top: 0.0938cqw;
+  /* nudged right by the side-bearing the name's larger glyphs carry, so the
+     two lines start on the same ink edge rather than the same box edge */
+  margin-left: 0.057em;
+  font-size: 0.625cqw;
+  font-weight: 400;
+  line-height: 1.2;
+  /* tracked so this line ends flush with ORY-LAVOLLÉE above it */
+  letter-spacing: 0.215em;
+  white-space: nowrap;
+}
+
+/* ---------- Pinned header ---------- */
+/* Sits in the white margins beside the content column, so it needs no backdrop.
+   Sizes track the hero's own type (1.5vw / 0.625vw) so pinning is seamless,
+   with a floor that keeps them readable on narrower screens. */
+.pinbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px 1.5vw 12px 2.75vw;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, visibility 0s linear 0.18s;
+}
+.pinbar.is-pinned {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.18s ease, visibility 0s;
+}
+.pinbar__sign { margin: 0; }
+.pinbar__name {
+  display: block;
+  font-size: max(13px, 1.5vw);
+  font-weight: 600;
+  line-height: 1.0833;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.pinbar__role {
+  display: block;
+  margin-top: 2px;
+  /* see .hero__sign-role: align on the ink edge, not the box edge */
+  margin-left: 0.057em;
+  font-size: max(9px, 0.625vw);
+  font-weight: 400;
+  line-height: 1.2;
+  /* tracked so this line ends flush with ORY-LAVOLLÉE above it */
+  letter-spacing: 0.215em;
+  white-space: nowrap;
+}
+.pinbar__info {
+  pointer-events: none;
+  font-size: max(12px, 1.4375vw);
+  font-weight: 600;
+  line-height: 1.2174;
+  text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.pinbar.is-pinned .pinbar__info { pointer-events: auto; }
+.pinbar__info:hover, .pinbar__info:focus-visible { border-color: var(--color-ink); }
+
+/* Below this width the content column leaves no free margin to sit in */
+@media (max-width: 1000px) {
+  .pinbar { display: none; }
 }
 
 .sr-only {
@@ -235,14 +377,28 @@ button { font-family: inherit; }
 .spotify-embed { border-radius: 12px; overflow: hidden; }
 .spotify-embed iframe { display: block; }
 .spotify-cta {
-  display: inline-block;
+  /* block so it sits on its own line under the text — as inline-block its
+     margin-top inflated the last line box and opened a gap mid-paragraph;
+     fit-content keeps the underline to the width of the words */
+  display: block;
+  width: fit-content;
   margin-top: 10px;
   color: var(--color-ink);
   border-bottom: 1px solid var(--color-ink);
 }
 
 /* ---------- About ---------- */
-.about { padding: clamp(56px, 8vw, 110px) 0; border-top: 1px solid var(--color-line); }
+/* Fills whatever the footer leaves of the last screen and centres its content
+   there, so landing at the bottom of the page shows Infos in the middle
+   instead of pinned to the top with dead space under it. The min-height only
+   binds when the content is shorter than the screen. */
+.about {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  padding: clamp(40px, 5vw, 70px) 0;
+  border-top: 1px solid var(--color-line);
+}
 .about__wrap {
   display: grid;
   grid-template-columns: minmax(160px, 220px) 1fr;
@@ -263,7 +419,8 @@ button { font-family: inherit; }
 .site-footer {
   position: relative;
   overflow: hidden;
-  min-height: 220px;
+  /* kept in step with the calc() in .about above */
+  min-height: 120px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -306,6 +463,4 @@ button { font-family: inherit; }
   .play-overlay { width: 60px; height: 60px; }
   .carousel__arrow { width: 32px; height: 32px; }
   .carousel__arrow .icon { width: 14px; height: 14px; }
-  .hero__title { font-size: 12vw; }
-  .hero__subtitle { font-size: 11px; }
 }

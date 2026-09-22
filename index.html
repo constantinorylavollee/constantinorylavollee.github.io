@@ -10,14 +10,36 @@
 </head>
 <body>
 
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="skip_link">Skip to content</a>
 
 <header class="hero">
-  <h1 class="sr-only">Constantin Ory-Lavollée — Compositeur · Producteur · Paris</h1>
-  <img class="hero__img" src="assets/img/hero.png" fetchpriority="high"
-       alt="Constantin Ory-Lavollée — Compositeur · Producteur · Paris">
-  <a class="hero__info-hit" href="#about" aria-label="Infos" data-i18n-aria="nav_info"></a>
+  <img class="hero__img" src="assets/img/hero.png" fetchpriority="high" alt="" aria-hidden="true">
+
+  <h1 class="hero__title">Constantin <br>Ory-Lavollée</h1>
+  <p class="hero__subtitle" data-i18n="subtitle">Compositeur · Producteur</p>
+
+  <div class="hero__controls">
+    <button type="button" class="lang-toggle" aria-label="Switch language">
+      <span data-lang-option="fr">FR</span><span class="lang-sep">/</span><span data-lang-option="en">EN</span>
+    </button>
+    <a class="hero__info" href="#about" data-i18n="nav_info">Infos</a>
+  </div>
+
+  <p class="hero__sign">
+    <span class="hero__sign-name">Constantin <br>Ory-Lavollée</span>
+    <span class="hero__sign-role" data-i18n="subtitle">Compositeur · Producteur</span>
+  </p>
 </header>
+
+<!-- Pinned header: takes over from the hero signature and INFO link once they
+     scroll off, and steps aside again when the Infos section arrives. -->
+<div class="pinbar" id="pinbar">
+  <p class="pinbar__sign">
+    <span class="pinbar__name">Constantin <br>Ory-Lavollée</span>
+    <span class="pinbar__role" data-i18n="subtitle">Compositeur · Producteur</span>
+  </p>
+  <a class="pinbar__info" href="#about" data-i18n="nav_info">Infos</a>
+</div>
 
 <main id="main">
 
@@ -25,7 +47,7 @@
     <div class="wrap">
       <div class="player" data-project="inani" data-peaks="assets/media/inani.peaks.json" data-duration="61.46">
         <div class="player__stage">
-          <video class="player__video" playsinline preload="metadata" poster="assets/img/project-inani.png">
+          <video class="player__video" playsinline preload="metadata" poster="assets/img/project-inani.jpg">
             <source src="assets/media/inani.mp4" type="video/mp4">
           </video>
           <button type="button" class="play-overlay" aria-label="Play">
@@ -37,14 +59,14 @@
       </div>
       <div class="project__row">
         <h2 class="project__title" id="inani-title">Inani</h2>
-        <p class="project__desc">Inani is a concept hardware brand created by art director Camille Vercken de Vreuschmen. I composed the music and designed the sound for its ad spot, working with hardware synthesizers, samples and effects.</p>
+        <p class="project__desc" data-i18n="desc_inani">Inani is a concept hardware brand created by art director Camille Vercken de Vreuschmen. I composed the music and designed the sound for its ad spot, working with hardware synthesizers, samples and effects.</p>
       </div>
     </div>
   </section>
 
   <section class="project" id="ormeau" aria-labelledby="ormeau-title">
     <div class="wrap">
-      <div class="player" data-project="ormeau" data-peaks="assets/media/ormeau.peaks.json" data-duration="151.32">
+      <div class="player" data-project="ormeau" data-peaks="assets/media/ormeau.peaks.json" data-duration="151.34">
         <div class="player__stage">
           <video class="player__video" playsinline preload="metadata" poster="assets/img/project-ormeau.png">
             <source src="assets/media/ormeau.mp4" type="video/mp4">
@@ -58,7 +80,7 @@
       </div>
       <div class="project__row">
         <h2 class="project__title" id="ormeau-title">Ormeau</h2>
-        <p class="project__desc">Ormeau is a short film directed by Juliette Roux, for which I did the sound design, ambient effects, and vocal processing. The film evokes the memory of a forgotten society, so I built an ethereal, atmospheric soundscape from layered pads, white noise, and richly textured field recordings to conjure a hazy, dreamlike mood.</p>
+        <p class="project__desc" data-i18n="desc_ormeau">Ormeau is a short film directed by Juliette Roux, for which I did the music, sound design, and ambient effects. The film evokes the memory of a forgotten society, so I built an ethereal, atmospheric soundscape from layered pads, white noise, and richly textured field recordings to conjure a hazy, dreamlike mood.</p>
       </div>
     </div>
   </section>
@@ -68,19 +90,32 @@
       <div class="player player--gallery" data-project="175" data-peaks="assets/media/175.peaks.json" data-audio="assets/media/175.mp3" data-duration="357.09">
         <div class="player__stage">
           <div class="carousel">
+            <!-- data-src, not src: the slides all sit inside the visible stage,
+                 so the browser would fetch all fifteen at once. main.js loads
+                 the active slide and its neighbours only. -->
             <div class="carousel__track">
+              <!-- Deliberate order, not the file numbering: the video opens,
+                   then the edition, the in-situ pieces and the series itself
+                   alternate, and so do portrait and landscape, so the first
+                   few slides already show the range of the project. -->
               <div class="carousel__slide is-active">
-                <img src="assets/img/project-175-1.jpg" alt="" loading="lazy">
+                <video class="carousel__video" src="assets/media/175.mp4" playsinline muted loop autoplay preload="auto"></video>
               </div>
-              <div class="carousel__slide">
-                <img src="assets/img/project-175-2.jpg" alt="" loading="lazy">
-              </div>
-              <div class="carousel__slide">
-                <img src="assets/img/project-175-3.jpg" alt="" loading="lazy">
-              </div>
-              <div class="carousel__slide">
-                <video class="carousel__video" src="assets/media/175.mp4" playsinline muted loop preload="none"></video>
-              </div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-11.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-05.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-03.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-15.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-09.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-01.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-13.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-10.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-02.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-14.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-12.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-08.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-06.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-04.jpg" alt=""></div>
+              <div class="carousel__slide"><img data-src="assets/img/project-175-07.jpg" alt=""></div>
             </div>
             <button type="button" class="carousel__arrow carousel__arrow--prev" aria-label="Previous" data-i18n-aria="carousel_prev">
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -98,7 +133,7 @@
       </div>
       <div class="project__row">
         <h2 class="project__title" id="p175-title">-1.75</h2>
-        <p class="project__desc">Original music for -1.75, a seven-part photography project by Jeanne Seurot. I composed three pieces designed as immersions into the images. The project unfolds across seven editions, each with its own visual atmosphere, so I responded with three hybrid tracks, woven from natural sounds and field ambiences, that give a narrative frame to the journey through the photographs.</p>
+        <p class="project__desc" data-i18n="desc_175">Original music and sound design for -1.75, a seven-part photography project by Jeanne Seurot. I composed three pieces designed as immersions into the images. The project unfolds across seven editions, each with its own visual atmosphere, so I responded with three hybrid tracks, woven from natural sounds and field ambiences, that give a narrative frame to the journey through the photographs.</p>
       </div>
     </div>
   </section>
@@ -119,6 +154,7 @@
       </div>
       <div class="project__row">
         <h2 class="project__title" id="karma8a-title">KARMA8A</h2>
+        <p class="project__desc" data-i18n="desc_karma8a">KARMA8A is a French bouldering brand. For its FW24 collection, built around a rawer aesthetic, founder René Grincourt filmed my friend and fellow artist Eutrop and me as we composed the track, and that session became part of the campaign itself. The result is a short ad driven by house textures and a quirky vocoder.</p>
       </div>
     </div>
   </section>
@@ -136,7 +172,7 @@
       <div class="project__row">
         <h2 class="project__title" id="ananas-title">Ananas Service</h2>
         <p class="project__desc">
-          Album ft. Eutrop.
+          <span data-i18n="desc_ananas">Here is my first album with my fellow artist Eutrop. It’s an experimental electronic journey across several genres, including French touch, techno and hip hop.</span>
           <a class="spotify-cta" href="https://open.spotify.com/intl-fr/album/4eR5RVyW3dPh3Ty0BpwPrK" target="_blank" rel="noopener" data-i18n="spotify_cta">Écouter sur Spotify</a>
         </p>
       </div>
@@ -150,13 +186,13 @@
       </div>
       <div class="about__content">
         <h2 class="about__title" id="about-title" data-i18n="nav_info">Infos</h2>
-        <p class="about__bio" data-i18n="bio">Bienvenue dans mon portfolio. Je m’appelle Constantin. En tant que compositeur et producteur, je travaille sur divers projets originaux : supervision musicale, compositions et arrangements pour d’autres musiciens. Je travaille essentiellement avec des synthétiseurs, mon violon et le logiciel Ableton, avec une prédilection pour la manipulation de samples. Ma double formation en management et en musicologie me permet de penser les projets musicaux sur leurs deux fronts : l’exigence artistique et les enjeux stratégiques d’une commande. N’hésitez pas à me contacter pour toute question ou envie de collaboration.</p>
+        <p class="about__bio" data-i18n="bio">Bienvenue dans mon portfolio ! Je m’appelle Constantin et je vis à Paris. En tant que compositeur et producteur, je travaille sur divers projets originaux : supervision musicale, compositions et arrangements pour d’autres musiciens. Je travaille essentiellement avec des synthétiseurs, mon violon et le logiciel Ableton, avec une prédilection pour la manipulation des samples. Ma double formation en management et en musicologie me permet de penser les projets musicaux sur leurs deux fronts : l’exigence artistique et les enjeux stratégiques d’une commande. N’hésitez pas à me contacter pour toute question ou envie de collaboration.</p>
 
         <div class="about__grid">
           <div class="about__block">
             <h3 data-i18n="education_label">Formation</h3>
             <p>ESSEC Business School — Master in Management<br><span class="dim">2021–2025</span></p>
-            <p>ENS Ulm — Musicologie<br><span class="dim">2025–2027</span></p>
+            <p><span data-i18n="education_ens">ENS Ulm — Musicologie</span><br><span class="dim">2024–2027</span></p>
           </div>
           <div class="about__block">
             <h3 data-i18n="contact_label">Contact</h3>
