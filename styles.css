@@ -455,12 +455,60 @@ button { font-family: inherit; }
   :root { --content: 90vw; }
 }
 
+/* ---------- Small screens ----------
+   The hero's type is a share of the artwork's width, which reads correctly on
+   a desktop but collapses to 3px on a phone. The max() floors below only ever
+   raise a size, so anything wide enough to be legible already is untouched —
+   the desktop rendering does not change. */
+.hero__subtitle { font-size: max(10px, 0.9375cqw); }
+
+@media (max-width: 900px) {
+  /* Redundant here: the same name sits at full size at the top of the very
+     same screen, and the band left for it is only ~39px tall. */
+  .hero__sign { display: none; }
+}
+
 @media (max-width: 640px) {
   .project__row { grid-template-columns: 1fr; gap: 10px; }
+  /* Portrait photographs were being shown 152px wide inside a landscape
+     frame, with black filling the rest. A taller frame gives them the space. */
+  .player--gallery .player__stage { aspect-ratio: 3 / 4; }
   .about__wrap { grid-template-columns: 1fr; }
   .about__photo { max-width: 200px; }
   .about__grid { grid-template-columns: 1fr; }
   .play-overlay { width: 60px; height: 60px; }
   .carousel__arrow { width: 32px; height: 32px; }
   .carousel__arrow .icon { width: 14px; height: 14px; }
+}
+
+/* ---------- Touch targets ----------
+   Last in the file so it wins over the width-based rules above. The ::after
+   pads the hit area out without moving anything, so these controls keep their
+   size on screen while becoming reachable with a thumb. */
+.hero__info,
+.hero__controls .lang-toggle,
+.spotify-cta,
+.about__block a { position: relative; }
+
+@media (pointer: coarse) {
+  .hero__info::after,
+  .hero__controls .lang-toggle::after,
+  .spotify-cta::after,
+  .about__block a::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+  }
+  /* FR/EN and INFOS sit a few pixels apart, so each one only grows away from
+     the other — padded symmetrically their areas would overlap and the taps
+     meant for the switch would land on the link. */
+  .hero__controls .lang-toggle::after { inset: -16px 0 -16px -16px; }
+  /* vertical only: INFOS is already wide enough, and it sits a few pixels from
+     the right edge — padding it sideways pushed the page wider than the screen */
+  .hero__info::after { inset: -12px 0; }
+  /* the contact links are stacked, so they need room between them or the
+     padded areas would overlap and swallow each other's taps */
+  .about__block p { margin-bottom: 22px; }
+  .carousel__arrow { width: 44px; height: 44px; }
+  .carousel__arrow .icon { width: 18px; height: 18px; }
 }
