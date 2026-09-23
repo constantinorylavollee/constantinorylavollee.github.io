@@ -16,7 +16,7 @@
       desc_ormeau: "Ormeau est un court-métrage réalisé par Juliette Roux, pour lequel j’ai composé la musique, fait le sound design et les effets d’ambiance. Le film raconte les mémoires d’une société oubliée. J’ai donc construit un paysage sonore atmosphérique et éthéré, à partir de multiples nappes, de bruit blanc et de field recordings, pour faire naître une ambiance onirique.",
       desc_175: "-1.75 est un projet photographique en sept éditions de Jeanne Seurot. J’ai composé à sa demande trois pièces musicales pensées comme des immersions dans les images. Chaque édition a sa propre atmosphère visuelle que les morceaux viennent soutenir mais parfois contrebalancer, le but étant de donner un cadre narratif sonore au parcours à travers les photographies.",
       desc_karma8a: "KARMA8A est une marque française de vêtements, centrée autour de l’escalade. Pour sa collection FW24, construite autour d’une esthétique plus brute, son fondateur René Grincourt nous a filmés, mon ami artiste Eutrop et moi, pendant que nous composions un morceau. Le résultat est un court film publicitaire porté par des sonorités house et un vocoder décalé. Film qui est devenu partie intégrante de la campagne sur Instagram.",
-      desc_ananas: "Voici mon premier album, avec mon complice Eutrop. C’est un voyage électronique expérimental à travers plusieurs genres, dont la French touch, la techno et le hip hop.",
+      desc_ananas: "Voici mon premier album, avec mon ami artiste Eutrop. C’est un voyage électronique expérimental à travers plusieurs genres, dont la French touch, la techno et le hip hop.",
       play: "Lecture",
       pause: "Pause",
       coming_soon: "Vidéo à venir",
