@@ -518,6 +518,11 @@ button { font-family: inherit; }
   /* Redundant here: the same name sits at full size at the top of the very
      same screen, and the band left for it is only ~39px tall. */
   .hero__sign { display: none; }
+
+  /* The desktop artwork ends on white, so the first project can start almost
+     straight after it. The phone's artwork runs to the very bottom edge of the
+     screen instead, and the next project was landing hard against it. */
+  #main > .project:first-child { padding-top: clamp(44px, 8vh, 80px); }
 }
 
 @media (max-width: 640px) {
