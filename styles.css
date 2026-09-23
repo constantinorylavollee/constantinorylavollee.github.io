@@ -55,6 +55,7 @@ button { font-family: inherit; }
   background: var(--color-bg);
   line-height: 0;
 }
+.hero__art { display: contents; }
 .hero__img { display: block; width: 100%; height: auto; }
 
 .hero__title,
@@ -493,14 +494,21 @@ button { font-family: inherit; }
     font-size: clamp(11px, 3.2vw, 15px);
     letter-spacing: 0.02em;
   }
-  /* auto margins centre the artwork in whatever height the title leaves; the
-     negative side margins cancel the hero's padding so it runs edge to edge */
+  /* The artwork fills the screen and the type sits over it, the way the
+     desktop composition works — rather than a picture stacked under a title
+     with white left over between them. */
   .hero__img {
-    order: 3;
-    width: calc(100% + var(--gutter) * 2);
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     max-width: none;
-    margin: auto calc(var(--gutter) * -1);
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
   }
+  .hero__title,
+  .hero__subtitle { z-index: 2; }
   .hero__controls {
     top: clamp(20px, 4vh, 40px);
     right: var(--gutter);

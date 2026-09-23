@@ -13,7 +13,13 @@
 <a class="skip-link" href="#main" data-i18n="skip_link">Skip to content</a>
 
 <header class="hero">
-  <img class="hero__img" src="assets/img/hero.jpg" fetchpriority="high" alt="" aria-hidden="true">
+  <!-- The phone gets its own artwork: the same three collage pieces recomposed
+       for a portrait screen, so the violin and the console survive instead of
+       being cropped away. display:contents keeps the desktop layout untouched. -->
+  <picture class="hero__art">
+    <source media="(max-width: 900px)" srcset="assets/img/hero-mobile.jpg">
+    <img class="hero__img" src="assets/img/hero.jpg" fetchpriority="high" alt="" aria-hidden="true">
+  </picture>
 
   <h1 class="hero__title">Constantin <br>Ory-Lavollée</h1>
   <p class="hero__subtitle" data-i18n="subtitle">Compositeur · Producteur</p>
