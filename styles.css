@@ -463,6 +463,50 @@ button { font-family: inherit; }
 .hero__subtitle { font-size: max(10px, 0.9375cqw); }
 
 @media (max-width: 900px) {
+  /* A screen of its own. The desktop hero is an absolutely positioned
+     composition measured against the artwork's width — sound on a wide screen,
+     but on a phone it leaves the artwork occupying barely a third of the view
+     with the next project already showing underneath. Here the hero becomes a
+     column that fills the screen: title, then the artwork, and nothing else.
+     svh rather than vh, or the browser's address bar would cover the bottom. */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(60px, 11vh, 104px) var(--gutter) clamp(28px, 5vh, 56px);
+    line-height: normal;
+  }
+  .hero__title,
+  .hero__subtitle {
+    position: static;
+    letter-spacing: normal;
+  }
+  .hero__title {
+    order: 1;
+    font-size: clamp(30px, 10.5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .hero__subtitle {
+    order: 2;
+    margin-top: 0.6em;
+    font-size: clamp(11px, 3.2vw, 15px);
+    letter-spacing: 0.02em;
+  }
+  /* auto margins centre the artwork in whatever height the title leaves; the
+     negative side margins cancel the hero's padding so it runs edge to edge */
+  .hero__img {
+    order: 3;
+    width: calc(100% + var(--gutter) * 2);
+    max-width: none;
+    margin: auto calc(var(--gutter) * -1);
+  }
+  .hero__controls {
+    top: clamp(20px, 4vh, 40px);
+    right: var(--gutter);
+    gap: 12px;
+  }
+
   /* Redundant here: the same name sits at full size at the top of the very
      same screen, and the band left for it is only ~39px tall. */
   .hero__sign { display: none; }
