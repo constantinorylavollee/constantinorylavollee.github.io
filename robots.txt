@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://constantinorylavollee.github.io/sitemap.xml
