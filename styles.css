@@ -406,7 +406,9 @@ button { font-family: inherit; }
   gap: clamp(24px, 5vw, 64px);
   align-items: start;
 }
-.about__photo img { border-radius: 8px; object-fit: cover; aspect-ratio: 3/4; width: 100%; }
+/* height: auto is what lets aspect-ratio win over the img's height attribute —
+   the attributes are there to reserve the space before the file arrives. */
+.about__photo img { border-radius: 8px; object-fit: cover; aspect-ratio: 3/4; width: 100%; height: auto; }
 .about__title { font-size: clamp(18px, 2vw, 24px); font-weight: 700; text-transform: uppercase; margin-bottom: 18px; }
 .about__bio { font-size: 14px; line-height: 1.7; max-width: 60ch; margin-bottom: 36px; }
 .about__grid { display: grid; grid-template-columns: repeat(2, minmax(150px, 1fr)); gap: 32px; }
